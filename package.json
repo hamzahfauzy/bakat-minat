@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "demo": "vue-cli-service build --mode demo",
-	"mirror": "vue-cli-service build --mode mirror",
+    "mirror": "vue-cli-service build --mode mirror",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

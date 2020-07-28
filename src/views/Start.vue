@@ -17,6 +17,7 @@
                             <v-text-field v-else dense outlined v-model="meta.value" :loading="loading" :rules="rules" :label="meta.label" />
                         </v-col>
 
+                        <!-- 
                         <v-col cols="12">
                             <p class="title">Informasi Akademik</p>
                         </v-col>
@@ -43,12 +44,13 @@
                                         </div>
                                     
                                     </div>
-                                    <!-- <v-textarea v-else-if="item.label == 'Lainnya'" outlined :label="item.label" v-model="item.value"></v-textarea> -->
+                                    <v-textarea v-else-if="item.label == 'Lainnya'" outlined :label="item.label" v-model="item.value"></v-textarea>
                                     <v-text-field v-else dense outlined v-model="item.value" :loading="loading" :label="item.label" />
                                 </div>
                             </div>
                             <v-text-field v-else dense outlined v-model="meta.value" :loading="loading" :rules="rules" :label="meta.label" />
                         </v-col>
+                        -->
 
                         <v-col cols="12" class="text-center">
                             <v-btn depressed class="primary" type="submit" form="form-start" :loading="loading" block>Submit</v-btn>
@@ -81,64 +83,64 @@
                         label:'NISN',
                         value:'' ,
                     },
-                    jenis_kelamin:{
-                        label:'Jenis Kelamin',
-                        value:'',
-                        options:['Laki-Laki','Perempuan']
-                    },
-                    nama_sma:{
-                        label:'Nama SMA',
-                        value:'',
-                    },
-                    asal_sekolah_smp:{
-                        label:'Asal Sekolah SMP',
-                        value:'',
-                    },
-                    jurusan:{
-                        label:'Jurusan yang diinginkan',
-                        value:'',
-                        options:['IPA','IPS','BAHASA']
-                    },
-                    cita_cita:{
-                        label:'Cita - cita',
-                        value:'',
-                    },
+                    // jenis_kelamin:{
+                    //     label:'Jenis Kelamin',
+                    //     value:'',
+                    //     options:['Laki-Laki','Perempuan']
+                    // },
+                    // nama_sma:{
+                    //     label:'Nama SMA',
+                    //     value:'',
+                    // },
+                    // asal_sekolah_smp:{
+                    //     label:'Asal Sekolah SMP',
+                    //     value:'',
+                    // },
+                    // jurusan:{
+                    //     label:'Jurusan yang diinginkan',
+                    //     value:'',
+                    //     options:['IPA','IPS','BAHASA']
+                    // },
+                    // cita_cita:{
+                    //     label:'Cita - cita',
+                    //     value:'',
+                    // },
                 },
-                academyc_information: {
-                    prestasi_akademik:{
-                        label:'Prestasi Akademik',
-                        items:{
-                            rangking_tertinggi:{
-                                label:'Rangking Tertinggi Selama SMP',
-                                value:'',
-                            },
-                            // lainnya:{
-                            //     label:'Lainnya',
-                            //     value:'',
-                            // }
-                        },
-                    },
-                    prestasi_non_akademik:{
-                        label:'Prestasi Non Akademik',
-                        items:{
-                            olimpiade: {
-                                label:"Olimpiade",
-                                value:[],
-                                items:true
-                            },
-                            olahraga: {
-                                label:"Olahraga",
-                                value:[],
-                                items:true
-                            },
-                            kesenian: {
-                                label:"Kesenian",
-                                value:[],
-                                items:true
-                            },
-                        },
-                    },
-                },
+                // academyc_information: {
+                //     prestasi_akademik:{
+                //         label:'Prestasi Akademik',
+                //         items:{
+                //             rangking_tertinggi:{
+                //                 label:'Rangking Tertinggi Selama SMP',
+                //                 value:'',
+                //             },
+                //             // lainnya:{
+                //             //     label:'Lainnya',
+                //             //     value:'',
+                //             // }
+                //         },
+                //     },
+                //     prestasi_non_akademik:{
+                //         label:'Prestasi Non Akademik',
+                //         items:{
+                //             olimpiade: {
+                //                 label:"Olimpiade",
+                //                 value:[],
+                //                 items:true
+                //             },
+                //             olahraga: {
+                //                 label:"Olahraga",
+                //                 value:[],
+                //                 items:true
+                //             },
+                //             kesenian: {
+                //                 label:"Kesenian",
+                //                 value:[],
+                //                 items:true
+                //             },
+                //         },
+                //     },
+                // },
                 rules : [
                     v => !!v || 'This field is required'
                 ],
@@ -168,20 +170,20 @@
                     nama_lengkap:this.person_information.nama_lengkap.value,
                     tempat_tanggal_lahir:this.person_information.tempat_tanggal_lahir.value,
                     NISN:this.person_information.NISN.value,
-                    jenis_kelamin:this.person_information.jenis_kelamin.value,
-                    nama_sma:this.person_information.nama_sma.value,
-                    asal_sekolah_smp:this.person_information.asal_sekolah_smp.value,
-                    jurusan:this.person_information.jurusan.value,
-                    cita_cita:this.person_information.cita_cita.value,
-                    prestasi_akademik:{
-                        rangking_tertinggi:this.academyc_information.prestasi_akademik.items.rangking_tertinggi.value,
-                        // lainnya:this.academyc_information.prestasi_akademik.items.lainnya.value,
-                    },
-                    prestasi_non_akademik:{
-                        olimpiade:this.academyc_information.prestasi_non_akademik.items.olimpiade.value,
-                        olahraga:this.academyc_information.prestasi_non_akademik.items.olahraga.value,
-                        kesenian:this.academyc_information.prestasi_non_akademik.items.kesenian.value
-                    }
+                    // jenis_kelamin:this.person_information.jenis_kelamin.value,
+                    // nama_sma:this.person_information.nama_sma.value,
+                    // asal_sekolah_smp:this.person_information.asal_sekolah_smp.value,
+                    // jurusan:this.person_information.jurusan.value,
+                    // cita_cita:this.person_information.cita_cita.value,
+                    // prestasi_akademik:{
+                    //     rangking_tertinggi:this.academyc_information.prestasi_akademik.items.rangking_tertinggi.value,
+                    //     // lainnya:this.academyc_information.prestasi_akademik.items.lainnya.value,
+                    // },
+                    // prestasi_non_akademik:{
+                    //     olimpiade:this.academyc_information.prestasi_non_akademik.items.olimpiade.value,
+                    //     olahraga:this.academyc_information.prestasi_non_akademik.items.olahraga.value,
+                    //     kesenian:this.academyc_information.prestasi_non_akademik.items.kesenian.value
+                    // }
                 }
                 if(this.$refs.form.validate() && this.detail){
                     this.startExam(meta)
@@ -209,12 +211,12 @@
             detail(user){
                 this.person_information.nama_lengkap.value = user.name
                 this.person_information.NISN.value = user.username
-                this.person_information.jenis_kelamin.value = user.metas.gender
-                this.person_information.nama_sma.value = user.metas.nama_sma
+                this.person_information.tempat_tanggal_lahir.value = user.metas.tempat_tanggal_lahir
+                // this.person_information.nama_sma.value = user.metas.nama_sma
             },
-            otherData(data){
-                this.person_information.nama_sma.value = data.school.name
-            }
+            // otherData(data){
+            //     this.person_information.nama_sma.value = data.school.name
+            // }
         }
     }
 </script>
