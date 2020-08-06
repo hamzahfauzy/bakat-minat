@@ -5,6 +5,7 @@ var state = {
     exams:[],
     exam:{},
     res:null,
+    hasil:{},
     participants:[],
     sequences:[],
     searches:[]
@@ -28,6 +29,9 @@ var mutations = {
     setSearches(state,exams){
         state.searches = exams
     },
+    setTanggal(state,hasil){
+        state.hasil = hasil
+    }
 }
 
 var actions = {
@@ -73,6 +77,13 @@ var actions = {
                 setTimeout(()=>{
                     state.res = null
                 },2000)
+            })
+    }  ,
+    getTanggal({commit}){
+        axios
+            .get(process.env.VUE_APP_URL+'tanggal-pengumuman')
+            .then(res => {
+                commit('setTanggal',res.data.data)
             })
     }  ,
     new({state,rootState},exam){

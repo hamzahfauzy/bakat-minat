@@ -91,7 +91,7 @@
             {{load}}
           </v-row>
           <v-row dense justify="center" align="center" v-if="detail">
-              <v-col class="text-center" sm="12" md="3">
+              <v-col class="text-center" sm="12" md="4">
                   <v-card outlined class="py-5">
                       <v-card-text>
                         <v-avatar color="grey" size="200">
@@ -101,14 +101,18 @@
                             <h2 class="title">{{detail.name}}</h2>
                             <span class="subtitle-1">NISN : {{detail.username}}</span>
                         </div>
-                        <v-btn depressed color="red" class="white--text" block target="_blank" href="https://www.youtube.com/watch?v=rIprh0-NS-k">Tutorial</v-btn>
+                        <!-- <v-btn depressed color="red" class="white--text" block target="_blank" href="https://www.youtube.com/watch?v=rIprh0-NS-k">Tutorial</v-btn>
                         <p></p>
                         <v-btn depressed color="primary" block target="_blank" href="http://exam.tmcindonesia.com">Uji Coba</v-btn>
-                        <p></p>
+                        <p></p> -->
                         <v-btn  v-if="sequences.length > 0 && typeof detail.metas.exam_finished === 'undefined'" depressed color="success" block @click="setSequencesBeforStart">Lanjutkan</v-btn>
-                        <v-btn text color="success" block v-else-if="detail.metas.exam_finished">Kamu Telah Menyelesaikan Tes</v-btn>
+                        <v-btn text v-else-if="detail.metas.exam_finished" color="success" block>Kamu Telah Menyelesaikan Tes</v-btn>
                         <v-btn depressed color="success" block to="/start" v-else-if="isStart">Mulai Tes</v-btn>
                         <v-btn text color="warning" block v-else>Tidak ada tes</v-btn>
+                        <p></p>
+                        <p>Hasil bisa Anda download pada tombol di bawah ini pada tanggal {{tanggal}}</p>
+                        <v-btn v-if="downloadHasil && detail.metas.exam_finished" depressed color="primary" target="_blank" :href="downloadURL+detail._id" block>Download Hasil</v-btn>
+                        <v-btn v-else depressed color="primary" block>Download Hasil</v-btn>
                         <v-btn text @click="setLogout" block>Keluar</v-btn>
                       </v-card-text>
                   </v-card>
@@ -128,6 +132,7 @@ export default {
           seqActive : 0,
           sequences : {},
           metas : {},
+          downloadURL:'',
           load : 'Loading...',
       }
   },
@@ -141,7 +146,9 @@ export default {
         this.getCategories()
         this.getPosts()
     }
+    this.getTanggal()
     this.seqActive = localStorage.getItem("seqActive") ? localStorage.getItem("seqActive") : 0
+    this.downloadURL = process.env.VUE_APP_URL + 'exams/download/'
   },
   computed:{
     ...mapState({
@@ -150,6 +157,8 @@ export default {
         detail : state => state.auth.detail,
         otherData : state => state.auth.otherData,
         users : state => state.user.users,
+        tanggal : state => state.exam.hasil.tanggal,
+        downloadHasil : state => state.exam.hasil.enable,
         categories : state => state.category.categories,
         galleries : state => state.gallery.galleries,
         questions : state=>state.post.posts.filter(post=>post.type_as == 'question').map((items,index)=>({...items,index:index+1})),
@@ -178,6 +187,7 @@ export default {
     }),
     ...mapActions('exam',{
         getExams : 'index',
+        getTanggal: 'getTanggal'
     }),
     ...mapActions('post',{
         getPosts : 'get',

@@ -104,6 +104,9 @@
                                 <v-list-item @click="report(item._id)" >
                                     <v-list-item-title>Download Nilai</v-list-item-title>
                                 </v-list-item>
+                                <v-list-item @click="reportDetail(item._id)" >
+                                    <v-list-item-title>Download Detail Nilai</v-list-item-title>
+                                </v-list-item>
                                 <v-list-item @click="beritaacara(item._id)" >
                                     <v-list-item-title>Berita Acara</v-list-item-title>
                                 </v-list-item>
@@ -254,7 +257,7 @@
                     </v-card-title>
                     <v-file-input style="display:none;" id="filetoupload" @change="uploadFile"></v-file-input>
                     <v-card-text>
-                        <v-data-table :items-per-page="15" :headers="participantHeaders" :items="participants" :loading="loading">
+                        <v-data-table :items-per-page="100" :headers="participantHeaders" :items="participants" :loading="loading">
                             <template v-slot:item.hasil="{item:{nilai},header}">
                                 <span v-for="n in nilai" :key="n.title">
                                     <span v-if="n.title == header.text">{{n.hasil}}</span>
@@ -385,14 +388,12 @@
                     // {text:'Tanggal Lahir',value:'metas.tempat_tanggal_lahir'},
                     // {text:'Jenis Kelamin',value:'metas.jenis_kelamin'},
                     {text:'Status',value:'status'},
-                    {text:'S1',value:'S1'},
-                    {text:'S2',value:'S2'},
-                    {text:'S3',value:'S3'},
-                    {text:'S4',value:'S4'},
-                    {text:'S5',value:'S5'},
-                    {text:'S6',value:'S6'},
-                    {text:'S7',value:'S7'},
-                    {text:'S8',value:'S8'},
+                    {text:'R',value:'R'},
+                    {text:'I',value:'I'},
+                    {text:'A',value:'A'},
+                    {text:'S',value:'S'},
+                    {text:'E',value:'E'},
+                    {text:'C',value:'C'}
                 ],
                 sequenceHeaders:[
                     {text:'Title',value:'title'},
@@ -476,6 +477,13 @@
                 // console.log(data)
                 // window.open(process.env.VUE_APP_URL+data.file)
                 window.open(process.env.VUE_APP_URL+'exams/report/'+exam_id)
+            },
+            async reportDetail(exam_id){
+                // let res = await fetch(process.env.VUE_APP_URL+'exams/report/'+exam_id)
+                // let data = await res.json()
+                // console.log(data)
+                // window.open(process.env.VUE_APP_URL+data.file)
+                window.open(process.env.VUE_APP_URL+'exams/report-detail/'+exam_id)
             },
             async beritaacara(exam_id){
                 // let res = await fetch(process.env.VUE_APP_URL+'exams/berita-acara/'+exam_id)
