@@ -1,6 +1,6 @@
 <template>
 <div style="background:#eaeaea;" class="fill-height">
-    <v-col class="text-center" style="position: fixed;z-index: 1;">
+    <v-col class="text-center" style="position: fixed;z-index: 1;" v-if="data.countdown != -1">
         <v-chip color="primary">{{data.countdown}} Detik</v-chip>
     </v-col>
     <v-container>
@@ -75,14 +75,17 @@ import { mapState, mapActions } from 'vuex'
                 localStorage.setItem('sequences',JSON.stringify(this.sequences))
             },
             countdown(){
-                this.interval = setInterval(()=>{                    
-                    if(this.data.countdown < 1){
-                        this.next()
-                    }else{
-                        this.data.countdown -= 1
-                        localStorage.setItem('sequences',JSON.stringify(this.sequences))
-                    }
-                },1000)
+                if(this.data.countdown != -1){
+                    this.interval = setInterval(()=>{                    
+                        if(this.data.countdown < 1){
+                            this.next()
+                        }else{
+                            this.data.countdown -= 1
+                            localStorage.setItem('sequences',JSON.stringify(this.sequences))
+                        }
+                    },1000)
+
+                }
             },
             async next(){
                 window.scrollTo({
