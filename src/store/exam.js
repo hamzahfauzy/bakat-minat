@@ -63,9 +63,38 @@ var actions = {
                 rootState.loading = false
             })
     },
+    resetParticipants({rootState,commit}, exam_id){
+        rootState.loading = true
+        axios
+            .get(process.env.VUE_APP_URL+'exams/reset/'+exam_id,{
+                headers: {
+                    'Authorization':rootState.userLoggedIn.token
+                }
+            })
+            .then(res => {
+                commit('setParticipants',res.data.data.participants)
+                rootState.loading = false
+            })
+    },
     import({state,rootState,commit},param){
         axios
             .post(process.env.VUE_APP_URL+'exams/'+param.exam_id,param.data,{
+                headers: {
+                    'Authorization':rootState.userLoggedIn.token,
+                    'Content-Type':'multipart/form-data'
+                }
+            })
+            .then(res => {
+                state.res = res.data
+                commit('setParticipants',res.data.data.participants)
+                setTimeout(()=>{
+                    state.res = null
+                },2000)
+            })
+    }  ,
+    importNilai({state,rootState,commit},param){
+        axios
+            .post(process.env.VUE_APP_URL+'exams/import-nilai/'+param.exam_id,param.data,{
                 headers: {
                     'Authorization':rootState.userLoggedIn.token,
                     'Content-Type':'multipart/form-data'

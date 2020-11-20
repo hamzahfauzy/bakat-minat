@@ -94,6 +94,23 @@
                             </template>
                             <span>Duplicate</span>
                         </v-tooltip>
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                                <v-btn icon color="purple" @click="doResetParticipant(item._id)"  v-on="on">
+                                    <v-icon small>mdi-refresh</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Reset Participant</span>
+                        </v-tooltip>
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                                <v-btn icon color="green" v-on="on" @click="openUploadDialog(item._id)">
+                                    <v-icon small>mdi-upload</v-icon>
+                                </v-btn>
+                                <v-file-input style="display:none;" id="inputUpload" @change="uploadNilai"></v-file-input>
+                            </template>
+                            <span>Upload Nilai</span>
+                        </v-tooltip>
                         <v-menu offset-y open-on-hover>
                             <template v-slot:activator="{ on }">
                                 <v-btn icon color="info" v-on="on">
@@ -408,6 +425,7 @@
                     timeout:20,
                 },
                 exam_active:{},
+                exam_clicked:0,
                 title:'',
                 start_time:'',
                 end_time:'',
@@ -459,7 +477,7 @@
             })
         },
         methods:{
-            ...mapActions('exam',['index','new','import','view','update','delete','addSequence','doUpdateOrder','doUpdateTimeout','duplicate','getParticipants','getParticipantsActive']),
+            ...mapActions('exam',['index','new','import','importNilai','view','update','delete','addSequence','doUpdateOrder','doUpdateTimeout','duplicate','resetParticipants','getParticipants','getParticipantsActive']),
             ...mapActions('category',{
                 getCategories:'index'
             }),
@@ -496,12 +514,25 @@
                 var filetoupload = document.getElementById('filetoupload')
                 filetoupload.click()
             },
+            openUploadDialog(exam_id){
+                this.exam_clicked = exam_id
+                var filetoupload = document.getElementById('inputUpload')
+                filetoupload.click()
+            },
             uploadFile(){
                 var files = document.getElementById('filetoupload').files
                 var formData = new FormData
                 formData.append('filetoupload',files[0])
                 formData.append('exam_id',this.exam_active._id)
                 this.import({exam_id:this.exam_active._id,data:formData})
+                this.index()
+            },
+            uploadNilai(){
+                var files = document.getElementById('inputUpload').files
+                var formData = new FormData
+                formData.append('inputUpload',files[0])
+                formData.append('exam_id',this.exam_clicked)
+                this.importNilai({exam_id:this.exam_clicked,data:formData})
                 this.index()
             },
             loadContent(){
@@ -544,6 +575,27 @@
                 this.exam_active = exam
                 this.participantDialog = true
                 this.getParticipants(exam._id)
+            },
+            doResetParticipant(exam_id){
+                Swal.fire({
+                    title:"Are you Sure to reset it?",
+                    icon:'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Reset it!'
+                }).then(res => {
+                    if(res.value){
+                        this.resetParticipants(exam_id)
+                        Swal.fire(
+                            'Reseted!',
+                            'The participants has been reset',
+                            'success'
+                        ).then(res=>{
+                            if(res.value){
+                                this.index()
+                            }
+                        })
+                    }
+                })
             },
             sequence(exam){
                 this.exam_active = exam
