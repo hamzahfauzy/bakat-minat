@@ -23,10 +23,10 @@ const actions = {
                     'Content-Type':'application/json'
                 }
             })
-        localStorage.setItem("sequences",JSON.stringify(res.data.data))
-        commit('setSequences',JSON.parse(localStorage.getItem("sequences")))
+        await localStorage.setItem("sequences",JSON.stringify(res.data.data))
+        await commit('setSequences',JSON.parse(localStorage.getItem("sequences")))
         rootState.loading = false
-        router.push({name:'sequence'})
+        await router.push({name:'sequence'})
     },
     sendUserSequence({rootState},data){
         rootState.loading = true
