@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import Login from '../views/Login'
 import Sequence from '../views/Sequence'
+import SequenceDemo from '../views/SequenceDemo'
 import Start from '../views/Start'
+import StartDemo from '../views/StartDemo'
 import Finish from '../views/Finish'
 
 // Admin
@@ -39,9 +41,19 @@ Vue.use(VueRouter)
     component:Sequence
   },
   {
+    path: '/sequence-demo/',
+    name: 'sequence-demo',
+    component:SequenceDemo
+  },
+  {
     path: '/start',
     name: 'start',
     component:Start
+  },
+  {
+    path: '/start-demo',
+    name: 'start-demo',
+    component:StartDemo
   },
   {
     path: '/finish',

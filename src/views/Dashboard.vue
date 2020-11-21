@@ -105,14 +105,14 @@
                         <p></p>
                         <v-btn depressed color="primary" block target="_blank" href="http://exam.tmcindonesia.com">Uji Coba</v-btn>
                         <p></p> -->
-                        <v-btn  v-if="false" depressed color="success" block @click="setSequencesBeforStart">Lanjutkan</v-btn>
+                        <v-btn  v-if="sequences.length > 0 && typeof detail.metas.exam_finished === 'undefined'" depressed color="success" block @click="setSequencesBeforStart">Lanjutkan</v-btn>
                         <v-btn text v-else-if="detail.metas.exam_finished" color="success" block>Kamu Telah Menyelesaikan Tes</v-btn>
                         <v-btn depressed color="success" block to="/start" v-else-if="isStart">Mulai Tes</v-btn>
                         <v-btn text color="warning" block v-else>Tidak ada tes</v-btn>
                         <p></p>
-                        <v-btn depressed color="primary" block target="_blank" href="http://exam.tmcindonesia.com/">Demo</v-btn>
+                        <v-btn depressed color="primary" block target="_blank" href="/start-demo">Uji Coba</v-btn>
                         <p></p>
-                        <v-btn depressed color="primary" block target="_blank" href="http://video.tmcindonesia.com/">Lihat video tutorial dan demo</v-btn>
+                        <v-btn depressed color="primary" block target="_blank" href="http://video.tmcindonesia.com/">Tutorial</v-btn>
                         <p></p>
                         <!-- <p>Hasil bisa Anda download pada tombol di bawah ini pada tanggal {{tanggal}}</p>
                         <v-btn v-if="downloadHasil && detail.metas.exam_finished" depressed color="primary" target="_blank" :href="downloadURL+detail._id" block>Download Hasil</v-btn>

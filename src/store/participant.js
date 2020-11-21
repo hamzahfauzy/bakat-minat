@@ -28,6 +28,19 @@ const actions = {
         rootState.loading = false
         await router.push({name:'sequence'})
     },
+    async startExamDemo({rootState,commit}){
+        rootState.loading = true
+        let res = await axios.post(process.env.VUE_APP_URL+'participant/exam/start-demo',{},{
+                headers:{
+                    'Authorization':rootState.userLoggedIn.token,
+                    'Content-Type':'application/json'
+                }
+            })
+        await localStorage.setItem("sequences",JSON.stringify(res.data.data))
+        await commit('setSequences',JSON.parse(localStorage.getItem("sequences")))
+        rootState.loading = false
+        await router.push({name:'sequence-demo'})
+    },
     sendUserSequence({rootState},data){
         rootState.loading = true
         return new Promise((resolve) => {
@@ -59,6 +72,12 @@ const actions = {
                 localStorage.removeItem("seqActive")
                 router.push({name:'finish'})
             })
+    },
+    finishExamDemo({rootState}){
+        rootState.loading = false
+        localStorage.removeItem("sequences")
+        localStorage.removeItem("seqActive")
+        router.push({name:'finish'})
     },
 }
 
