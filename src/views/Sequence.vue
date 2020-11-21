@@ -1,5 +1,6 @@
 <template>
 <div style="background:#eaeaea;" class="fill-height">
+    <v-form ref="form" @submit.prevent="next" id="form-seq">
     <v-col class="text-center" style="position: fixed;z-index: 1;" v-if="data.countdown != -1">
         <v-chip color="primary">{{data.countdown}} Detik</v-chip>
     </v-col>
@@ -20,7 +21,7 @@
                         <v-card outlined>
                             <v-card-text>
                                 <p class="subtitle" v-html="content.parent.description"></p>
-                                <v-radio-group @change="selectedAnswer" dense v-model="content.selected">
+                                <v-radio-group @change="selectedAnswer" dense v-model="content.selected" :rules="content.childs.length == 5 ? rules : []">
                                     <v-radio v-for="answer in content.childs" :key="answer._id" :value="answer._id">
                                         <template v-slot:label>
                                             <span v-html="answer.description" style="width:100%"></span>
@@ -33,7 +34,7 @@
                 </v-row>
                 <v-row dense>
                     <v-col class="text-right">
-                        <v-btn @click="next" depressed color="primary" block>
+                        <v-btn type="submit" form="form-seq" depressed color="primary" block>
                             {{index == sequences.length-1 ? 'Selesai' : 'Selanjutnya'}} <v-icon>{{index == sequences.length-1 ? 'mdi-check' :'mdi-arrow-right'}}</v-icon>
                         </v-btn>
                     </v-col>
@@ -41,6 +42,7 @@
             </v-col>
         </v-row>
     </v-container>
+    </v-form>
     </div>
 </template>
 
@@ -55,6 +57,9 @@ import { mapState, mapActions } from 'vuex'
                 data:null,
                 index:0,
                 interval:null,
+                rules : [
+                    v => !!v || 'This field is required'
+                ],
             }
         },
         created(){
@@ -88,20 +93,22 @@ import { mapState, mapActions } from 'vuex'
                 }
             },
             async next(){
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                if(this.index == this.sequences.length-1){
-                    await this.finish()
-                    localStorage.setItem("seqActive","finished")
-                }else{
-                    clearInterval(this.interval)
-                    this.index++
-                    await this.sendUserSequence({sequences:this.sequences,seqActive:this.index})
-                    this.data = this.sequences[this.index]
-                    localStorage.setItem("seqActive",this.index)
-                    this.countdown()
+                if(this.$refs.form.validate()){
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if(this.index == this.sequences.length-1){
+                        await this.finish()
+                        localStorage.setItem("seqActive","finished")
+                    }else{
+                        clearInterval(this.interval)
+                        this.index++
+                        await this.sendUserSequence({sequences:this.sequences,seqActive:this.index})
+                        this.data = this.sequences[this.index]
+                        localStorage.setItem("seqActive",this.index)
+                        this.countdown()
+                    }
                 }
             },
             async finish(){ 

@@ -112,10 +112,12 @@
                         <p></p>
                         <v-btn depressed color="primary" block target="_blank" href="http://exam.tmcindonesia.com/">Demo</v-btn>
                         <p></p>
+                        <v-btn depressed color="primary" block target="_blank" href="http://video.tmcindonesia.com/">Lihat video tutorial dan demo</v-btn>
+                        <p></p>
                         <!-- <p>Hasil bisa Anda download pada tombol di bawah ini pada tanggal {{tanggal}}</p>
                         <v-btn v-if="downloadHasil && detail.metas.exam_finished" depressed color="primary" target="_blank" :href="downloadURL+detail._id" block>Download Hasil</v-btn>
                         <v-btn v-else depressed color="primary" block>Download Hasil</v-btn> -->
-                        <v-btn text @click="setLogout" block>Keluar</v-btn>
+                        <v-btn text color="red" @click="setLogout" block>Keluar</v-btn>
                       </v-card-text>
                   </v-card>
               </v-col>

@@ -63,10 +63,10 @@
                         <v-row v-for="(item,ind) in olimpiade.value" :key="ind+'Olimpiade'" >
                             
                             <v-col cols="7">
-                                <v-text-field dense outlined v-model="item.nama.value" :loading="loading" :rules="rules" :label="item.nama.label" />
+                                <v-text-field dense outlined v-model="item.nama.value" :loading="loading" :label="item.nama.label" />
                             </v-col>
                             <v-col cols="5">
-                                <v-text-field dense outlined v-model="item.hasil.value" :loading="loading" :rules="rules" :label="item.hasil.label" />
+                                <v-text-field dense outlined v-model="item.hasil.value" :loading="loading" :label="item.hasil.label" />
                             </v-col>
                             
                         </v-row>
@@ -332,11 +332,7 @@
                 },
                 nilai_tertinggi_xii:{
                     mata_pelajaran:{
-                        label:'Mata Pelajaran',
-                        value:''
-                    },
-                    nilai:{
-                        label:'Nilai',
+                        label:'Mata Pelajaran Kesukaan',
                         value:''
                     },
                 },
@@ -452,7 +448,6 @@
                     },
                     nilai_tertinggi_xii:{
                         mata_pelajaran:this.nilai_tertinggi_xii.mata_pelajaran.value,
-                        nilai:this.nilai_tertinggi_xii.nilai.value,
                     },
                     jurusan:this.jurusan.value,
                     cita_cita:this.cita_cita.value,
@@ -497,40 +492,54 @@
             detail(user){
                 this.person_information.nama_lengkap.value = user.name
                 this.person_information.NIS.value = user.username
-                this.person_information.tempat_tanggal_lahir.value = user.metas.tempat_tanggal_lahir
-                this.person_information.alamat.value = user.metas.alamat
-                this.person_information.anak_ke.value = user.metas.anak_ke
-                this.person_information.hp.value = user.metas.hp
-                this.person_information.jenis_kelamin.value = user.metas.jenis_kelamin
-                this.person_information.anak_ke.from = user.metas.anak_ke_dari
+                this.person_information.tempat_tanggal_lahir.value = user.metas.tempat_lahir+", "+user.metas.tanggal_lahir
+                this.person_information.alamat.value = user.metas.alamat ? user.metas.alamat : this.person_information.alamat.value
 
-                this.kendala.value = user.metas.kendala
+                this.person_information.anak_ke.value = user.metas.anak_ke ? user.metas.anak_ke : this.person_information.anak_ke.value
 
-                this.academyc_sd.nama_sekolah.value = user.metas.academyc_sd.nama_sekolah
-                this.academyc_sd.tahun_lulus.value = user.metas.academyc_sd.tahun_lulus
-                this.academyc_sd.rangking_tertinggi.value = user.metas.academyc_sd.rangking_tertinggi
+                this.person_information.hp.value = user.metas.hp ? user.metas.hp : this.person_information.hp.value
 
-                this.academyc_smp.nama_sekolah.value = user.metas.academyc_smp.nama_sekolah
-                this.academyc_smp.tahun_lulus.value = user.metas.academyc_smp.tahun_lulus
-                this.academyc_smp.rangking_tertinggi.value = user.metas.academyc_smp.rangking_tertinggi
+                this.person_information.jenis_kelamin.value = user.metas.jenis_kelamin == "P" || user.metas.jenis_kelamin == "Perempuan" ? "Perempuan" : "Laki-Laki"
+                
+                this.person_information.anak_ke.from = user.metas.anak_ke_dari ? user.metas.anak_ke_dari : this.person_information.anak_ke.from
+                this.kendala.value = user.metas.kendala ? user.metas.kendala : this.kendala.value
 
-                this.academyc_sma.nama_sekolah.value = user.metas.academyc_sma.nama_sekolah
-                this.academyc_sma.jurusan.value = user.metas.academyc_sma.jurusan
-                this.academyc_sma.rangking_tertinggi.value = user.metas.academyc_sma.rangking_tertinggi
+                if(user.metas.academyc_sd){
+                    this.academyc_sd.nama_sekolah.value = user.metas.academyc_sd.nama_sekolah
+                    this.academyc_sd.tahun_lulus.value = user.metas.academyc_sd.tahun_lulus
+                    this.academyc_sd.rangking_tertinggi.value = user.metas.academyc_sd.rangking_tertinggi
+                }
 
-                this.nilai_tertinggi_x.mata_pelajaran.value = user.metas.nilai_tertinggi_x.mata_pelajaran
-                this.nilai_tertinggi_x.nilai.value = user.metas.nilai_tertinggi_x.nilai
+                if(user.metas.academyc_smp){
+                    this.academyc_smp.nama_sekolah.value = user.metas.academyc_smp.nama_sekolah
+                    this.academyc_smp.tahun_lulus.value = user.metas.academyc_smp.tahun_lulus
+                    this.academyc_smp.rangking_tertinggi.value = user.metas.academyc_smp.rangking_tertinggi
+                }
 
-                this.nilai_tertinggi_xi.mata_pelajaran.value = user.metas.nilai_tertinggi_xi.mata_pelajaran
-                this.nilai_tertinggi_xi.nilai.value = user.metas.nilai_tertinggi_xi.nilai
+                if(user.metas.academyc_sma){
+                    this.academyc_sma.nama_sekolah.value = user.metas.academyc_sma.nama_sekolah
+                    this.academyc_sma.jurusan.value = user.metas.academyc_sma.jurusan
+                    this.academyc_sma.rangking_tertinggi.value = user.metas.academyc_sma.rangking_tertinggi
+                }
 
-                this.nilai_tertinggi_xii.mata_pelajaran.value = user.metas.nilai_tertinggi_xii.mata_pelajaran
-                this.nilai_tertinggi_xii.nilai.value = user.metas.nilai_tertinggi_xii.nilai
+                if(user.metas.nilai_tertinggi_x){
+                    this.nilai_tertinggi_x.mata_pelajaran.value = user.metas.nilai_tertinggi_x.mata_pelajaran
+                    this.nilai_tertinggi_x.nilai.value = user.metas.nilai_tertinggi_x.nilai
+                }
 
-                this.cita_cita.value = user.metas.cita_cita
-                this.hobi.value = user.metas.hobi
-                this.jurusan.value = user.metas.jurusan
-                this.olimpiade.value = user.metas.olimpiade
+                if(user.metas.nilai_tertinggi_x){
+                    this.nilai_tertinggi_xi.mata_pelajaran.value = user.metas.nilai_tertinggi_xi.mata_pelajaran
+                    this.nilai_tertinggi_xi.nilai.value = user.metas.nilai_tertinggi_xi.nilai
+                }
+
+                if(user.metas.nilai_tertinggi_x){
+                    this.nilai_tertinggi_xii.mata_pelajaran.value = user.metas.nilai_tertinggi_xii.mata_pelajaran
+                }
+
+                this.cita_cita.value = user.metas.cita_cita ? user.metas.cita_cita : this.cita_cita.value
+                this.hobi.value = user.metas.hobi ? user.metas.hobi : this.hobi.value
+                this.jurusan.value = user.metas.jurusan ? user.metas.jurusan : this.jurusan.value
+                this.olimpiade.value = user.metas.olimpiade ? user.metas.olimpiade : this.olimpiade.value
 
             },
         }

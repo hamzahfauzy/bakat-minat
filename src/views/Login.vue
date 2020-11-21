@@ -18,9 +18,9 @@
                             <div>
                                 <br>
                                 <b>Kontak Whatsapp:</b><br>
-                                087867504803 (Bapak Ferdy)<br>
-                                082367579262 (Ibu Yani)<br>
-                                082166601184 (Ibu Thalita)<br>
+                                0878 6750 4803 (Bapak Ferdi) <br>
+                                0852 6137 6128 (Ibu Eka) <br>
+                                0831 6379 7858 (Ibu Erida) <br>
                             </div>
                             <v-btn text disabled block>copyright &copy; 2020 z-techno</v-btn>
                         </v-form>
