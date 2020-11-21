@@ -25,6 +25,7 @@
                                 </v-col>
                             </v-row>
 
+                            <v-text-field v-else-if="meta.label == 'NIS'" dense outlined v-model="meta.value" readonly color="grey" filled :loading="loading" :rules="rules" :label="meta.label" />
                             <v-text-field v-else dense outlined v-model="meta.value" :loading="loading" :rules="rules" :label="meta.label" />
                         </v-col>
 
