@@ -371,23 +371,6 @@
                         label:'HP / WA',
                         value:'' ,
                     },
-                    // nama_sma:{
-                    //     label:'Nama SMA',
-                    //     value:'',
-                    // },
-                    // asal_sekolah_smp:{
-                    //     label:'Asal Sekolah SMP',
-                    //     value:'',
-                    // },
-                    // jurusan:{
-                    //     label:'Jurusan yang diinginkan',
-                    //     value:'',
-                    //     options:['IPA','IPS','BAHASA']
-                    // },
-                    // cita_cita:{
-                    //     label:'Cita - cita',
-                    //     value:'',
-                    // },
                 },
                 // academyc_information: {
                 //     prestasi_akademik:{
@@ -490,19 +473,6 @@
                         jurusan:this.academyc_sma.jurusan.value,
                         rangking_tertinggi:this.academyc_sma.rangking_tertinggi.value,
                     },
-                    // nama_sma:this.person_information.nama_sma.value,
-                    // asal_sekolah_smp:this.person_information.asal_sekolah_smp.value,
-                    // jurusan:this.person_information.jurusan.value,
-                    // cita_cita:this.person_information.cita_cita.value,
-                    // prestasi_akademik:{
-                    //     rangking_tertinggi:this.academyc_information.prestasi_akademik.items.rangking_tertinggi.value,
-                    //     // lainnya:this.academyc_information.prestasi_akademik.items.lainnya.value,
-                    // },
-                    // prestasi_non_akademik:{
-                    //     olimpiade:this.academyc_information.prestasi_non_akademik.items.olimpiade.value,
-                    //     olahraga:this.academyc_information.prestasi_non_akademik.items.olahraga.value,
-                    //     kesenian:this.academyc_information.prestasi_non_akademik.items.kesenian.value
-                    // }
                 }
                 if(this.$refs.form.validate() && this.detail){
                     this.startExam(meta)
@@ -527,12 +497,41 @@
                 this.person_information.nama_lengkap.value = user.name
                 this.person_information.NISN.value = user.username
                 this.person_information.tempat_tanggal_lahir.value = user.metas.tempat_tanggal_lahir
-                console.log(user)
-                // this.person_information.nama_sma.value = user.metas.nama_sma
+                this.person_information.alamat.value = user.metas.alamat
+                this.person_information.anak_ke.value = user.metas.anak_ke
+                this.person_information.hp.value = user.metas.hp
+                this.person_information.jenis_kelamin.value = user.metas.jenis_kelamin
+                this.person_information.anak_ke.from = user.metas.anak_ke_dari
+
+                this.kendala.value = user.metas.kendala
+
+                this.academyc_sd.nama_sekolah.value = user.metas.academyc_sd.nama_sekolah
+                this.academyc_sd.tahun_lulus.value = user.metas.academyc_sd.tahun_lulus
+                this.academyc_sd.rangking_tertinggi.value = user.metas.academyc_sd.rangking_tertinggi
+
+                this.academyc_smp.nama_sekolah.value = user.metas.academyc_smp.nama_sekolah
+                this.academyc_smp.tahun_lulus.value = user.metas.academyc_smp.tahun_lulus
+                this.academyc_smp.rangking_tertinggi.value = user.metas.academyc_smp.rangking_tertinggi
+
+                this.academyc_sma.nama_sekolah.value = user.metas.academyc_sma.nama_sekolah
+                this.academyc_sma.jurusan.value = user.metas.academyc_sma.jurusan
+                this.academyc_sma.rangking_tertinggi.value = user.metas.academyc_sma.rangking_tertinggi
+
+                this.nilai_tertinggi_x.mata_pelajaran.value = user.metas.nilai_tertinggi_x.mata_pelajaran
+                this.nilai_tertinggi_x.nilai.value = user.metas.nilai_tertinggi_x.nilai
+
+                this.nilai_tertinggi_xi.mata_pelajaran.value = user.metas.nilai_tertinggi_xi.mata_pelajaran
+                this.nilai_tertinggi_xi.nilai.value = user.metas.nilai_tertinggi_xi.nilai
+
+                this.nilai_tertinggi_xii.mata_pelajaran.value = user.metas.nilai_tertinggi_xii.mata_pelajaran
+                this.nilai_tertinggi_xii.nilai.value = user.metas.nilai_tertinggi_xii.nilai
+
+                this.cita_cita.value = user.metas.cita_cita
+                this.hobi.value = user.metas.hobi
+                this.jurusan.value = user.metas.jurusan
+                this.olimpiade.value = user.metas.olimpiade
+
             },
-            // otherData(data){
-            //     this.person_information.nama_sma.value = data.school.name
-            // }
         }
     }
 </script>
