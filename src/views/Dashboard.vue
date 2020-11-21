@@ -99,7 +99,7 @@
                         </v-avatar>
                         <div class="my-5">
                             <h2 class="title">{{detail.name}}</h2>
-                            <span class="subtitle-1">NISN : {{detail.username}}</span>
+                            <span class="subtitle-1">NIS : {{detail.username}}</span>
                         </div>
                         <!-- <v-btn depressed color="red" class="white--text" block target="_blank" href="https://www.youtube.com/watch?v=rIprh0-NS-k">Tutorial</v-btn>
                         <p></p>

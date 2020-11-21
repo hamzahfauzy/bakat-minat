@@ -349,8 +349,8 @@
                         value:'',
                         ttl:true,
                     },
-                    NISN:{
-                        label:'NISN',
+                    NIS:{
+                        label:'NIS',
                         value:'' ,
                     },
                     jenis_kelamin:{
@@ -435,7 +435,7 @@
                     exam_id:this.detail.metas.exam_id,
                     nama_lengkap:this.person_information.nama_lengkap.value,
                     tempat_tanggal_lahir:this.person_information.tempat_tanggal_lahir.value,
-                    NISN:this.person_information.NISN.value,
+                    NIS:this.person_information.NIS.value,
                     jenis_kelamin:this.person_information.jenis_kelamin.value,
                     alamat:this.person_information.alamat.value,
                     anak_ke:this.person_information.anak_ke.value,
@@ -495,7 +495,7 @@
         watch:{
             detail(user){
                 this.person_information.nama_lengkap.value = user.name
-                this.person_information.NISN.value = user.username
+                this.person_information.NIS.value = user.username
                 this.person_information.tempat_tanggal_lahir.value = user.metas.tempat_tanggal_lahir
                 this.person_information.alamat.value = user.metas.alamat
                 this.person_information.anak_ke.value = user.metas.anak_ke
