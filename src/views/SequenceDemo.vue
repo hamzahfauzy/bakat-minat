@@ -1,5 +1,6 @@
 <template>
 <div style="background:#eaeaea;" class="fill-height">
+    <v-form ref="form" @submit.prevent="next" id="form-seq">
     <v-col class="text-center" style="position: fixed;z-index: 1;" v-if="data.countdown != -1">
         <v-chip color="primary">{{data.countdown}} Detik</v-chip>
     </v-col>
@@ -17,7 +18,7 @@
             <v-col sm="12" md="6">
                 <v-row dense>
                     <v-col cols="12" v-for="(content,index) in data.contents" :key="content._id">
-                        <v-card outlined v-if="index <= 3">
+                        <v-card outlined v-if="index < 3">
                             <v-card-text>
                                 <p class="subtitle" v-html="content.parent.description"></p>
                                 <v-radio-group dense v-model="content.selected" :rules="content.childs.length == 5 ? rules : []">
@@ -41,6 +42,7 @@
             </v-col>
         </v-row>
     </v-container>
+    </v-form>
     </div>
 </template>
 
@@ -107,20 +109,22 @@ import { mapState, mapActions } from 'vuex'
                 }
             },
             async next(){
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                if(this.index == 13){
-                    await this.finish()
-                    localStorage.setItem("seqActive","finished")
-                }else{
-                    clearInterval(this.interval)
-                    this.index++
-                    // await this.sendUserSequence({sequences:this.sequences,seqActive:this.index})
-                    this.data = this.sequences[this.enableSubtest[this.index]]
-                    localStorage.setItem("seqActive",this.index)
-                    this.countdown()
+                if(this.$refs.form.validate()){
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if(this.index == 13){
+                        await this.finish()
+                        localStorage.setItem("seqActive","finished")
+                    }else{
+                        clearInterval(this.interval)
+                        this.index++
+                        // await this.sendUserSequence({sequences:this.sequences,seqActive:this.index})
+                        this.data = this.sequences[this.enableSubtest[this.index]]
+                        localStorage.setItem("seqActive",this.index)
+                        this.countdown()
+                    }
                 }
             },
             async finish(){ 

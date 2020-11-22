@@ -63,10 +63,10 @@
                         <v-row v-for="(item,ind) in olimpiade.value" :key="ind+'Olimpiade'" >
                             
                             <v-col cols="7">
-                                <v-text-field dense outlined v-model="item.nama.value" :loading="loading" :rules="rules" :label="item.nama.label" />
+                                <v-text-field dense outlined v-model="item.nama.value" :loading="loading" :label="item.nama.label" />
                             </v-col>
                             <v-col cols="5">
-                                <v-text-field dense outlined v-model="item.hasil.value" :loading="loading" :rules="rules" :label="item.hasil.label" />
+                                <v-text-field dense outlined v-model="item.hasil.value" :loading="loading" :label="item.hasil.label" />
                             </v-col>
                             
                         </v-row>
@@ -116,7 +116,7 @@
                         </v-col>
                         
                         <v-col cols="12">
-                            <p class="title">Nilai Tertinggi Kelas XII</p>
+                            <p class="title">Mata Pelajaran Kesukaan</p>
                         </v-col>
                         
                         <v-col v-for="(meta,idx) in nilai_tertinggi_xii" :key="idx+'nilaixii'" cols="12">
@@ -205,7 +205,7 @@
                 },
                 academyc_sma:{
                     nama_sekolah:{
-                        label:'Nama Sekolah',
+                        label:'Kelas',
                         value:''
                     },
                     jurusan:{
@@ -332,11 +332,7 @@
                 },
                 nilai_tertinggi_xii:{
                     mata_pelajaran:{
-                        label:'Mata Pelajaran',
-                        value:''
-                    },
-                    nilai:{
-                        label:'Nilai',
+                        label:'Mata Pelajaran Kesukaan',
                         value:''
                     },
                 },

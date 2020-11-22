@@ -116,7 +116,7 @@
                         </v-col>
                         
                         <v-col cols="12">
-                            <p class="title">Nilai Tertinggi Kelas XII</p>
+                            <p class="title">Mata Pelajaran Kesukaan</p>
                         </v-col>
                         
                         <v-col v-for="(meta,idx) in nilai_tertinggi_xii" :key="idx+'nilaixii'" cols="12">
@@ -205,7 +205,7 @@
                 },
                 academyc_sma:{
                     nama_sekolah:{
-                        label:'Nama Sekolah',
+                        label:'Kelas',
                         value:''
                     },
                     jurusan:{
