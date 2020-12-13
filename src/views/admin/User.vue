@@ -37,6 +37,9 @@
                     :search="search"
                 >
                     <template v-slot:item.actions="{ item }">
+                        <v-btn icon @click="resetUser(item._id)" color="success" >
+                            <v-icon small>mdi-refresh</v-icon>
+                        </v-btn>
                         <v-btn icon @click="find(item._id)" color="orange" >
                             <v-icon small>mdi-pencil</v-icon>
                         </v-btn>
@@ -56,6 +59,10 @@
                         </v-list-item-content>
                     </v-list-item>
                     <v-card-actions>
+                        <v-btn text color="success" @click="resetUser(user._id)">
+                            <v-icon left>mdi-refresh</v-icon>
+                            {{$vuetify.breakpoint.mdAndUp ? 'Reset' : ''}}
+                        </v-btn>
                         <v-btn text color="warning" @click="find(user._id)">
                             <v-icon left>mdi-pencil</v-icon>
                             {{$vuetify.breakpoint.mdAndUp ? 'Edit' : ''}}
@@ -133,8 +140,8 @@
                 search:'',
                 headers: [
                     {text: 'No', value: 'index',},
-                    {text: 'Name', value: 'name',},
-                    { text: 'Gender', value: 'metas.gender' },
+                    {text: 'Nama', value: 'name',},
+                    { text: 'Jenis Kelamin', value: 'metas.jenis_kelamin' },
                     { text: 'Actions', value: 'actions', sortable: false },
                 ],
                 tableMode:0
@@ -152,7 +159,7 @@
             })
         },
         methods:{
-            ...mapActions('user',['index','new','view','update','delete']),
+            ...mapActions('user',['index','new','view','update','delete','reset']),
             ...mapMutations('user',['setUser','setUsers','setSearches']),
             add(){
                 if(this.$refs.form.validate()){
@@ -200,6 +207,27 @@
                         Swal.fire(
                             'Deleted!',
                             'The item has been deleted',
+                            'success'
+                        ).then(res=>{
+                            if(res.value){
+                                this.index()
+                            }
+                        })
+                    }
+                })
+            },
+            resetUser(id){    
+               Swal.fire({
+                    title:"Are you Sure to reset it?",
+                    icon:'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, reset it!'
+                }).then(res => {
+                    if(res.value){
+                        this.reset(id)
+                        Swal.fire(
+                            'Reseted!',
+                            'The item has been reset',
                             'success'
                         ).then(res=>{
                             if(res.value){

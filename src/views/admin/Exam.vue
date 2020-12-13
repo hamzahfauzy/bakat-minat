@@ -410,7 +410,8 @@
                     {text:'A',value:'A'},
                     {text:'S',value:'S'},
                     {text:'E',value:'E'},
-                    {text:'C',value:'C'}
+                    {text:'C',value:'C'},
+                    {text:'Total TPA',value:'total_tpo'}
                 ],
                 sequenceHeaders:[
                     {text:'Title',value:'title'},

@@ -75,6 +75,14 @@ var actions = {
                     'Authorization':rootState.userLoggedIn.token
                 }
             })
+    } ,
+    reset({rootState},id){
+        axios
+            .get(process.env.VUE_APP_URL+'users/'+id+'/reset',{
+                headers: {
+                    'Authorization':rootState.userLoggedIn.token
+                }
+            })
     }  
 }
 

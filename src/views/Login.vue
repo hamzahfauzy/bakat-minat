@@ -6,11 +6,11 @@
                     <v-card-text>
                         <v-img src="../assets/logo.png" alt="Logo Z-Techno" eager height="150" contain></v-img>
                         <h2 class="heading my-5">Login</h2>
-                        <v-alert v-if="auth.message" type="error" dense>{{auth.message}}</v-alert>
-                        <v-alert v-if="!browserCheck" type="warning" dense>
-                        Agar lancar dalam melaksanakan tes minat bakat, pastikan anda menggunakan browser Google Chrome dengan versi terbaru.<br>
-                        Klik <a href="https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=com.android.chrome">Disini</a> untuk mengupdate google chrome.
+                        <v-alert type="warning" dense>
+                        Pastikan anda menggunakan browser Google Chrome dengan versi terbaru.<br>
+                        <!-- Klik <a href="https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=com.android.chrome">Disini</a> untuk mengupdate google chrome. -->
                         </v-alert>
+                        <v-alert v-if="auth.message" type="error" dense>{{auth.message}}</v-alert>
                         <v-form ref="form" @submit.prevent="login" id="form-login">
                             <v-text-field dense outlined v-model="username" :loading="loading" :rules="rules" label="Username" />
                             <v-text-field dense outlined v-model="password" :loading="loading" :rules="rules" label="Password" type="password" />
